@@ -1,9 +1,9 @@
 <template>
   <div class="person">
-    <h1>This is an Films page</h1>
+    <h1>Films</h1>
     <b-row>
       <b-col>
-
+        <b-table responsive striped hover small :fields="fields"></b-table>
       </b-col>
     </b-row>
   </div>
@@ -11,7 +11,14 @@
 
 <script>
 export default {
-  name: "films"
+  name: "films",
+  data() {
+    return {
+      fields: [
+        { sortable: "true", key: "name" },
+        { sortable: "true", key: "planet" }
+      ]
+    };
+  }
 };
 </script>
-
