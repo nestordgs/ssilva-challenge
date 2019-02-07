@@ -1,12 +1,25 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <PageHeader />
     </div>
-    <router-view />
+    <b-container class="my-4">
+      <router-view />
+    </b-container>
   </div>
 </template>
+
+<script>
+// @ is an alias to /src
+import PageHeader from "@/components/PageHeader";
+
+export default {
+  name: "home",
+  components: {
+    PageHeader
+  }
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -16,14 +29,14 @@
   text-align: center;
   color: #2c3e50;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+// #nav {
+//   padding: 30px;
+//   a {
+//     font-weight: bold;
+//     color: #2c3e50;
+//     &.router-link-exact-active {
+//       color: #42b983;
+//     }
+//   }
+// }
 </style>
