@@ -4,6 +4,22 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 
+import BootstrapVue from "bootstrap-vue";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faHome, faUsers, faFilm } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(faHome);
+library.add(faUsers);
+library.add(faFilm);
+
+Vue.component("font-awesome", FontAwesomeIcon);
+
+Vue.use(BootstrapVue);
+
 Vue.config.productionTip = false;
 
 new Vue({
