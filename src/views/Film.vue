@@ -16,7 +16,7 @@
               type="button"
               variant="primary"
               size="sm"
-              @click.stop="info(item.item, $event.target)"
+              :to="{ name: 'films.detail', params: { id: linkId(item.item) } }"
             >
               Details
             </b-button>
@@ -71,6 +71,12 @@ export default {
     info(item, button) {
       this.filmsDetail = this.filmsResult.find(film => film.url === item.url);
       console.log(button);
+    },
+    linkId(item) {
+      let parts = item.url.split("/");
+      let lastSegment = parts.pop() || parts.pop();
+
+      return lastSegment;
     }
   },
   mounted() {
