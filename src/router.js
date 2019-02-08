@@ -26,13 +26,12 @@ export default new Router({
       path: "/people",
       name: "people",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/People.vue")
+        import(/* webpackChunkName: "people" */ "./views/People.vue")
     },
     {
       path: "/films",
       name: "films",
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Film.vue")
+      component: () => import(/* webpackChunkName: "film" */ "./views/Film.vue")
     }
   ]
 });
