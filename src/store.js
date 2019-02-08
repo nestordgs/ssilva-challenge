@@ -1,22 +1,17 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { apiGet } from "./services/Api";
+import filmsModule from "./store/modules/films";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     apiURL: "https://swapi.co/api/",
-    films: [],
     characters: {
       count: null,
       results: []
-    },
-    characterDetail: {},
-    filmDetail: {},
-    species: [],
-    planets: [],
-    vehicle: []
+    }
   },
   mutations: {
     setCharacters(state, payload) {
@@ -40,5 +35,8 @@ export default new Vuex.Store({
         });
       }
     }
+  },
+  modules: {
+    films: filmsModule
   }
 });
