@@ -36,16 +36,60 @@
         </p>
       </b-col>
       <b-col cols="12">
-        <h3>Species</h3>
+        <b-card-group deck class="mb-3">
+          <b-card no-body v-if="info.vehicles.length">
+            <h4 slot="header" class="mb-0">Vehicles</h4>
+            <b-list-group flush>
+              <b-list-group-item
+                v-for="vehicle in info.vehicles"
+                :key="vehicle.id"
+                class="px-2"
+              >
+                {{ vehicle }}
+              </b-list-group-item>
+            </b-list-group>
+          </b-card>
+          <b-card no-body v-if="info.films.length">
+            <h4 slot="header" class="mb-0">Films</h4>
+            <b-list-group flush>
+              <b-list-group-item
+                v-for="film in info.films"
+                :key="film.id"
+                class="px-2"
+              >
+                {{ film }}
+              </b-list-group-item>
+            </b-list-group>
+          </b-card>
+        </b-card-group>
       </b-col>
       <b-col cols="12">
-        <h3>Starships</h3>
-      </b-col>
-      <b-col cols="12">
-        <h3>Vehicles</h3>
-      </b-col>
-      <b-col cols="12">
-        <h3>films</h3>
+        <b-card-group deck class="mb-3">
+          <b-card no-body v-if="info.starships.length">
+            <h4 slot="header" class="mb-0">Starships</h4>
+            <b-list-group flush>
+              <b-list-group-item
+                v-for="item in info.starships"
+                :key="item.id"
+                class="px-2"
+              >
+                {{ item }}
+              </b-list-group-item>
+            </b-list-group>
+          </b-card>
+          <b-card no-body v-if="info.species.length">
+            <h4 slot="header" class="mb-0">Species</h4>
+            <b-list-group flush>
+              <b-list-group-item
+                v-for="item in info.species"
+                :key="item.id"
+                class="px-2"
+              >
+                {{ item }}
+              </b-list-group-item>
+            </b-list-group>
+          </b-card>
+        </b-card-group>
       </b-col>
     </b-row>
   </b-modal>
