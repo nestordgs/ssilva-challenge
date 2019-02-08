@@ -135,7 +135,7 @@ export default {
       };
     },
     info(item, button) {
-      this.peopleDetail = this.getcharacters.find(
+      this.peopleDetail = this.charactersResult.find(
         character => character.url === item.url
       );
       this.$root.$emit("bv::show::modal", "modalDetail", button);
