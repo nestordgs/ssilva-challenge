@@ -7,8 +7,8 @@
         </router-link>
       </div>
       <div class="p-2">
-        <router-link class="text-light" :to="{ name: 'persons' }">
-          <font-awesome icon="users" /> Persons
+        <router-link class="text-light" :to="{ name: 'people' }">
+          <font-awesome icon="users" /> People
         </router-link>
       </div>
       <div class="p-2">
