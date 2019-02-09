@@ -59,13 +59,11 @@
 
 <script>
 import FormSearchPerson from "@/components/FormSearchPerson";
-import ModalPeople from "@/components/ModalPeopleDetail";
 
 export default {
   name: "people",
   components: {
-    FormSearchPerson,
-    ModalPeople
+    FormSearchPerson
   },
   data() {
     return {
@@ -112,7 +110,7 @@ export default {
     },
     getCharacterPaginate(url) {
       let explodeUrl = url.split("?");
-      this.$store.dispatch("getCharacters", explodeUrl[1]);
+      this.$store.dispatch("getCharacters", `?${explodeUrl[1]}`);
     },
     resetModal() {
       this.peopleDetail = {
