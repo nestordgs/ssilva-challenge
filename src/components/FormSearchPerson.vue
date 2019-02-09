@@ -42,7 +42,7 @@ export default {
     filterRequest() {
       if (this.$v.filter.alphaNum) {
         if (this.filter) {
-          this.$store.dispatch("getCharacters", `search=${this.filter}`);
+          this.$store.dispatch("getCharacters", `?search=${this.filter}`);
         } else {
           this.$store.dispatch("getCharacters");
         }
