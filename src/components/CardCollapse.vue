@@ -13,7 +13,7 @@
       <b-card-body class="p-0">
         <b-list-group flush v-if="data.length > 0">
           <b-list-group-item v-for="item in data" :key="item.id">
-            <span v-if="details" variant="link" @click="getCharacter(item)">
+            <span v-if="details" class="cursor-pointer" @click="getCharacter(item)">
               {{ item }}
             </span>
             <span v-else>
@@ -30,6 +30,12 @@
     </b-collapse>
   </b-card>
 </template>
+
+<style>
+.cursor-pointer {
+  cursor: pointer;
+}
+</style>
 
 <script>
 export default {

@@ -85,11 +85,9 @@ export default {
   computed: {},
   methods: {
     resetModal() {},
-    getFilm() {
+    async getFilm() {
       let id = this.$route.params.id;
-      this.film = this.$store.state.films.data.results.find(
-        film => film.url === `https://swapi.co/api/films/${id}/`
-      );
+      this.film = await this.$store.dispatch("getFilm", `${id}`);
     }
   },
   mounted() {

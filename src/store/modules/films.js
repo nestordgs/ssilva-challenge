@@ -28,6 +28,24 @@ export default {
           results: []
         });
       }
+    },
+    async getFilm({ state }, id) {
+      try {
+        let film;
+
+        film = state.data.results.find(film => {
+          return film.url === `${state.apiURL}${id}/`;
+        });
+
+        if (!film) {
+          film = await apiGet(`${state.apiURL}${id}/`);
+          return film.data;
+        } else {
+          return film;
+        }
+      } catch (error) {
+        console.log("aqui");
+      }
     }
   }
 };
