@@ -36,8 +36,8 @@
         <div>
           <b-button
             variant="link"
-            v-show="$store.state.characters.previous"
-            @click="getCharacterPaginate($store.state.characters.previous)"
+            v-show="$store.state.people.data.previous"
+            @click="getCharacterPaginate($store.state.people.data.previous)"
           >
             Previous Page
           </b-button>
@@ -45,8 +45,8 @@
         <div>
           <b-button
             variant="link"
-            v-show="$store.state.characters.next"
-            @click="getCharacterPaginate($store.state.characters.next)"
+            v-show="$store.state.people.data.next"
+            @click="getCharacterPaginate($store.state.people.data.next)"
           >
             Next Page
           </b-button>
@@ -99,7 +99,7 @@ export default {
   },
   computed: {
     charactersResult() {
-      return this.$store.state.characters.results;
+      return this.$store.state.people.data.results;
     }
   },
   methods: {
