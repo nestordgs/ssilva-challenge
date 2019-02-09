@@ -57,7 +57,9 @@
                 :key="film.id"
                 class="px-2"
               >
-                <b-link :to="{ name: 'films.detail', params: { id: linkId(film) } }">
+                <b-link
+                  :to="{ name: 'films.detail', params: { id: linkId(film) } }"
+                >
                   {{ film }}
                 </b-link>
               </b-list-group-item>
