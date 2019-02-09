@@ -57,7 +57,9 @@
                 :key="film.id"
                 class="px-2"
               >
-                {{ film }}
+                <b-link :to="{ name: 'films.detail', params: { id: linkId(film) } }">
+                  {{ film }}
+                </b-link>
               </b-list-group-item>
             </b-list-group>
           </b-card>
@@ -107,6 +109,12 @@ export default {
   methods: {
     reset() {
       this.$emit("reset");
+    },
+    linkId(item) {
+      let parts = item.split("/");
+      let lastSegment = parts.pop() || parts.pop();
+
+      return lastSegment;
     }
   }
 };
