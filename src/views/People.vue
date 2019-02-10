@@ -3,20 +3,24 @@
     <h1>People</h1>
     <FormSearchPerson />
     <b-row class="mt-5">
-      <b-col>
+      <b-col cols="12">
+        <FilterPeople />
+      </b-col>
+      <b-col cols="12">
         <b-table
-          responsive
-          striped
           hover
           small
+          striped
+          responsive
+          show-empty
           :fields="fields"
           :items="charactersResult"
         >
-          <template slot="homeworld">
-            <b-button type="button" variant="info" size="sm">Planet</b-button>
+          <template slot="homeworld" slot-scope="item">
+            {{ $store.getters.getPlanetByUrl(item.item.homeworld) }}
           </template>
-          <template slot="species">
-            <b-button type="button" variant="info" size="sm">Specie</b-button>
+          <template slot="species" slot-scope="item">
+            {{ $store.getters.getSpecieByUrl(item.item.species[0]) }}
           </template>
           <template slot="actions" slot-scope="item">
             <b-button
@@ -36,8 +40,8 @@
         <div>
           <b-button
             variant="link"
-            v-show="$store.state.characters.previous"
-            @click="getCharacterPaginate($store.state.characters.previous)"
+            v-show="$store.state.people.data.previous"
+            @click="getCharacterPaginate($store.state.people.data.previous)"
           >
             Previous Page
           </b-button>
@@ -45,8 +49,8 @@
         <div>
           <b-button
             variant="link"
-            v-show="$store.state.characters.next"
-            @click="getCharacterPaginate($store.state.characters.next)"
+            v-show="$store.state.people.data.next"
+            @click="getCharacterPaginate($store.state.people.data.next)"
           >
             Next Page
           </b-button>
@@ -59,11 +63,13 @@
 
 <script>
 import FormSearchPerson from "@/components/FormSearchPerson";
+import FilterPeople from "@/components/FilterPeople";
 
 export default {
   name: "people",
   components: {
-    FormSearchPerson
+    FormSearchPerson,
+    FilterPeople
   },
   data() {
     return {
@@ -75,7 +81,6 @@ export default {
         { sortable: "true", key: "birth_year", label: "Birthday Year" },
         { key: "actions", label: " ", variant: "links", class: "text-right" }
       ],
-      people: [],
       peopleDetail: {
         name: "",
         height: "",
@@ -93,13 +98,12 @@ export default {
         created: "",
         edited: "",
         url: ""
-      },
-      filterRequest: ""
+      }
     };
   },
   computed: {
     charactersResult() {
-      return this.$store.state.characters.results;
+      return this.$store.state.people.data.results;
     }
   },
   methods: {
