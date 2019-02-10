@@ -8,15 +8,16 @@
       </b-col>
       <b-col cols="12">
         <b-table
-          responsive
-          striped
           hover
           small
+          striped
+          responsive
+          show-empty
           :fields="fields"
           :items="charactersResult"
         >
-          <template slot="homeworld">
-            <b-button type="button" variant="info" size="sm">Planet</b-button>
+          <template slot="homeworld" slot-scope="item">
+            {{ $store.getters.getPlanetByUrl(item.item.homeworld) }}
           </template>
           <template slot="species">
             <b-button type="button" variant="info" size="sm">Specie</b-button>
