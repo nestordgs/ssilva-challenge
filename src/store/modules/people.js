@@ -35,7 +35,7 @@ export default {
       state.characterDetails = payload;
     },
     setPlanets(state, payload) {
-      state.planets = payload;
+      state.planets.push(payload);
     }
   },
   actions: {
@@ -99,10 +99,18 @@ export default {
       try {
         let planets = [];
         for (const people of state.data.results) {
-          let planet = await normalRequest().get(people.homeworld);
-          planets.push(planet.data);
+          let existsPlanet = state.planets.find(currentPlanet => {
+            return currentPlanet.url === people.homeworld;
+          });
+          let previousRequest = planets.find(currentPlanet => {
+            return currentPlanet.url === people.homeworld;
+          });
+          if (!existsPlanet && !previousRequest) {
+            let planet = await normalRequest().get(people.homeworld);
+            planets.push(planet.data);
+            commit("setPlanets", planet.data);
+          }
         }
-        commit("setPlanets", planets);
       } catch (error) {
         console.error(
           `Somthing went wrong into people module line 106: ${error}`
