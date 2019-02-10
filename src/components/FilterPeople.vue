@@ -11,7 +11,7 @@
         <span v-if="numFilters">({{ numFilters }})</span>
       </b-btn>
     </p>
-    <b-collapse id="collapse1" visible>
+    <b-collapse id="collapse1">
       <b-card>
         <h4 slot="header" class="card-text">Filters Table</h4>
         <b-form>
