@@ -25,7 +25,8 @@ export default {
       edited: "",
       url: ""
     },
-    planets: []
+    planets: [],
+    species: []
   },
   mutations: {
     setCharacters(state, payload) {
@@ -36,6 +37,9 @@ export default {
     },
     setPlanets(state, payload) {
       state.planets.push(payload);
+    },
+    setSpecie(state, payload) {
+      state.species.push(payload);
     }
   },
   actions: {
@@ -95,7 +99,7 @@ export default {
         });
       }
     },
-    getPlanet: async ({ state, commit }) => {
+    getPlanet: async ({ state, commit, dispatch }) => {
       try {
         let planets = [];
         for (const people of state.data.results) {
@@ -111,11 +115,35 @@ export default {
             commit("setPlanets", planet.data);
           }
         }
+        dispatch("getSpecie");
       } catch (error) {
         console.error(
           `Somthing went wrong into people module line 106: ${error}`
         );
-        commit("setPlanets", "planets");
+      }
+    },
+    getSpecie: async ({ state, commit }) => {
+      try {
+        let species = [];
+        for (const people of state.data.results) {
+          for (const peopleSpecie of people.species) {
+            let existSpecie = state.species.find(currentSpecie => {
+              return currentSpecie.url === peopleSpecie;
+            });
+            let previousRequest = species.find(currentSpecie => {
+              return currentSpecie.url === peopleSpecie;
+            });
+            if (!existSpecie && !previousRequest) {
+              let specie = await normalRequest().get(peopleSpecie);
+              species.push(specie.data);
+              commit("setSpecie", specie.data);
+            }
+          }
+        }
+      } catch (error) {
+        console.error(
+          `Somthing went wrong into people module line 106: ${error}`
+        );
       }
     }
   },
@@ -124,6 +152,11 @@ export default {
       let planet = state.planets.find(planet => planet.url === url);
 
       return planet ? planet.name : "N/A";
+    },
+    getSpecieByUrl: state => url => {
+      let specie = state.species.find(specie => specie.url === url);
+
+      return specie ? specie.name : "Unknown";
     }
   }
 };

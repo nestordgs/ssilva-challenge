@@ -107,7 +107,8 @@ export default {
       ],
       optionsGender: [
         { valie: "male", text: "Male" },
-        { valie: "female", text: "Female" }
+        { valie: "female", text: "Female" },
+        { valie: "hermaphrodite", text: "Hermaphrodite" }
       ]
     };
   },

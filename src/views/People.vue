@@ -19,8 +19,8 @@
           <template slot="homeworld" slot-scope="item">
             {{ $store.getters.getPlanetByUrl(item.item.homeworld) }}
           </template>
-          <template slot="species">
-            <b-button type="button" variant="info" size="sm">Specie</b-button>
+          <template slot="species" slot-scope="item">
+            {{ $store.getters.getSpecieByUrl(item.item.species[0]) }}
           </template>
           <template slot="actions" slot-scope="item">
             <b-button
