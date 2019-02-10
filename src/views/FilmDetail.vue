@@ -48,7 +48,10 @@
         </b-card-group>
       </b-col>
     </b-row>
-    <ModalPeople :info="$store.state.people.characterDetails" @reset="resetModal" />
+    <ModalPeople
+      :info="$store.state.people.characterDetails"
+      @reset="resetModal"
+    />
     <!-- <p>{{ $store.state.characterDetails }}</p> -->
   </div>
 </template>

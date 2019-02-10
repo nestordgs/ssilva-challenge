@@ -3,7 +3,10 @@
     <h1>People</h1>
     <FormSearchPerson />
     <b-row class="mt-5">
-      <b-col>
+      <b-col cols="12">
+        <FilterPeople />
+      </b-col>
+      <b-col cols="12">
         <b-table
           responsive
           striped
@@ -59,11 +62,13 @@
 
 <script>
 import FormSearchPerson from "@/components/FormSearchPerson";
+import FilterPeople from "@/components/FilterPeople";
 
 export default {
   name: "people",
   components: {
-    FormSearchPerson
+    FormSearchPerson,
+    FilterPeople
   },
   data() {
     return {
@@ -75,7 +80,6 @@ export default {
         { sortable: "true", key: "birth_year", label: "Birthday Year" },
         { key: "actions", label: " ", variant: "links", class: "text-right" }
       ],
-      people: [],
       peopleDetail: {
         name: "",
         height: "",
@@ -93,8 +97,7 @@ export default {
         created: "",
         edited: "",
         url: ""
-      },
-      filterRequest: ""
+      }
     };
   },
   computed: {
