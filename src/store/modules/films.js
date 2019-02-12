@@ -47,5 +47,24 @@ export default {
         console.log("aqui");
       }
     }
+  },
+  getters: {
+    getFilm: state => {
+      return state.data.results;
+    },
+    getDirectors: state => {
+      let directors = [{ value: null, text: "Selecte one Director" }];
+
+      state.data.results.forEach(film => {
+        if (!directors.includes(film.director)) {
+          directors.push({
+            value: film.director,
+            text: film.director
+          });
+        }
+      });
+
+      return directors;
+    }
   }
 };
