@@ -1,6 +1,6 @@
 <template>
   <div class="person">
-    <h1>Films</h1>
+    <h1 class="text-center">Films</h1>
     <b-row>
       <b-col>
         <b-table

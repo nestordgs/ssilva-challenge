@@ -157,6 +157,9 @@ export default {
       let specie = state.species.find(specie => specie.url === url);
 
       return specie ? specie.name : "Unknown";
+    },
+    getPeople: state => {
+      return state.data.results;
     }
   }
 };

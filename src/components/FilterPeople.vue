@@ -20,13 +20,13 @@
               <b-form-group label="Name / Species">
                 <b-input-group>
                   <b-form-input
-                    id="namEspecie"
-                    name="nameEspecie"
+                    id="name_specie"
+                    name="name_specie"
                     size="sm"
-                    v-model.trim="filtros.nameEspecie"
+                    v-model="filter.name_specie"
                   ></b-form-input>
                   <b-input-group-append>
-                    <b-btn size="sm" @click="filtros.nameEspecie = ''">
+                    <b-btn size="sm" @click="filter.name_specie = ''">
                       Clear
                     </b-btn>
                   </b-input-group-append>
@@ -37,19 +37,21 @@
               <legend class="col-form-label pt-0">Planets</legend>
               <b-form-select
                 multiple
-                id="planetsFilter"
-                name="planetsFilter"
+                :select-size="4"
+                v-model="filter.planets"
                 class="mb-3"
                 size="sm"
-                v-model="filtros.planets"
-                :value="filtros.planets"
-                :options="optionsPlanets"
+                id="planetsFilter"
+                name="planetsFilter"
+                :value="filter.planets"
               >
-                <template slot="first">
-                  <option :value="null" disabled class="opt-disable">
-                    Select One
-                  </option>
-                </template>
+                <option
+                  v-for="planet in $store.state.people.planets"
+                  :key="planet.url"
+                  :value="planet.url"
+                >
+                  {{ planet.name }}
+                </option>
               </b-form-select>
             </b-col>
             <b-col cols="12" sm="6" md="4" xl="3">
@@ -59,15 +61,10 @@
                 name="genderFilter"
                 class="mb-3"
                 size="sm"
-                v-model="filtros.gender"
-                :value="filtros.gender"
+                v-model="filter.gender"
+                :value="filter.gender"
                 :options="optionsGender"
               >
-                <template slot="first">
-                  <option :value="null" disabled class="opt-disable">
-                    Select One
-                  </option>
-                </template>
               </b-form-select>
             </b-col>
             <b-col cols="12" sm="6" md="4" xl="3">
@@ -91,46 +88,36 @@
 <script>
 export default {
   name: "FilterPeople",
+  props: {
+    filter: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
-      filtros: {
-        nameEspecie: "",
-        planets: [],
-        gender: null,
-        birth_year: null
-      },
       optionsPlanets: [
+        { value: null, text: "Select One or More Planets" },
         { value: "martes", text: "Martes" },
         { value: "venus", text: "Venus" },
         { value: "jupiter", text: "Jupiter" },
         { value: "tierta", text: "Tierra" }
       ],
       optionsGender: [
-        { valie: "male", text: "Male" },
-        { valie: "female", text: "Female" },
-        { valie: "hermaphrodite", text: "Hermaphrodite" }
+        { value: null, text: "Select One Gender" },
+        { value: "m", text: "Male" },
+        { value: "f", text: "Female" },
+        { value: "h", text: "Hermaphrodite" },
+        { value: "n", text: "N/A" }
       ]
     };
   },
   computed: {
     numFilters() {
-      return Object.values(this.filtros).filter(value => value && value.length)
+      return Object.values(this.filter).filter(value => value && value.length)
         .length;
     }
   },
-  methods: {
-    // multiFilter(array, filters) {
-    //   const filterKeys = Object.keys(filters);
-    //   // filters all elements passing the criteria
-    //   return array.filter((item) => {
-    //     // dynamically validate all filter criteria
-    //     return filterKeys.every(key => {
-    //       // ignores an empty filter
-    //       if (!filters[key].length) return true;
-    //       return filters[key].includes(item[key]);
-    //     });
-    //   });
-    // }
-  }
+  methods: {}
 };
 </script>

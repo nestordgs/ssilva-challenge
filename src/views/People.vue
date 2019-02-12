@@ -1,10 +1,10 @@
 <template>
   <div class="person">
-    <h1>People</h1>
+    <h1 class="text-center">People</h1>
     <FormSearchPerson />
     <b-row class="mt-5">
       <b-col cols="12">
-        <FilterPeople />
+        <FilterPeople :filter="filter" />
       </b-col>
       <b-col cols="12">
         <b-table
@@ -73,6 +73,12 @@ export default {
   },
   data() {
     return {
+      filter: {
+        name_specie: "",
+        planets: [],
+        gender: null,
+        birth_year: null
+      },
       fields: [
         { sortable: "true", key: "name" },
         { sortable: "true", key: "species" },
@@ -103,7 +109,7 @@ export default {
   },
   computed: {
     charactersResult() {
-      return this.$store.state.people.data.results;
+      return this.multiFilter(this.$store.getters.getPeople);
     }
   },
   methods: {
@@ -141,6 +147,31 @@ export default {
         character => character.url === item.url
       );
       this.$root.$emit("bv::show::modal", "modalDetail", button);
+    },
+    multiFilter(array) {
+      let filtros = this.filter;
+
+      array = array.filter(item => {
+        let pass = true;
+        if (filtros.name_specie) {
+          if (!item.name.includes(filtros.name_specie)) {
+            pass = false;
+          }
+        }
+        if (filtros.gender) {
+          if (!item.gender.startsWith(filtros.gender)) {
+            pass = false;
+          }
+        }
+        if (filtros.planets.length) {
+          if (!filtros.planets.includes(item.homeworld)) {
+            pass = false;
+          }
+        }
+        return pass;
+      });
+
+      return array;
     }
   },
   mounted() {
