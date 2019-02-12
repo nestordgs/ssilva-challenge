@@ -73,10 +73,27 @@
                 id="birthYearFilter"
                 name="birthYearFilter"
                 size="sm"
-                v-model="filtros.birth_year"
+                v-model="filter.birth_year"
                 type="range"
                 class="custom-range"
               ></b-form-input>
+              <div class="d-flex justify-content-between mt-2">
+                <div v-b-tooltip.html.bottom title="Before the Battle of Yavin">
+                  <small>
+                    BBY
+                  </small>
+                </div>
+                <div v-b-tooltip.html.bottom title="Battle of Yavin">
+                  <small>
+                    BY
+                  </small>
+                </div>
+                <div v-b-tooltip.html.bottom title="After the Battle of Yavin">
+                  <small>
+                    ABY
+                  </small>
+                </div>
+              </div>
             </b-col>
           </b-row>
         </b-form>
