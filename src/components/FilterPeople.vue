@@ -67,7 +67,7 @@
               >
               </b-form-select>
             </b-col>
-            <b-col cols="12" sm="6" md="4" xl="3">
+            <!-- <b-col cols="12" sm="6" md="4" xl="3">
               <legend class="col-form-label pt-0">Birthday Year Range</legend>
               <b-form-input
                 id="birthYearFilter"
@@ -94,7 +94,7 @@
                   </small>
                 </div>
               </div>
-            </b-col>
+            </b-col> -->
           </b-row>
         </b-form>
       </b-card>
