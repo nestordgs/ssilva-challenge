@@ -42,7 +42,7 @@
           {{ $store.getters.getPlanetByUrl(info.homeworld) }}
         </p>
       </b-col>
-      <b-col cols="12" lg="5" offset-md="1" class="mb-md-3">
+      <b-col cols="12" lg="5" offset-md="1" class="mb-3">
         <h4 class="text-center">Species</h4>
         <b-list-group>
           <b-list-group-item
@@ -57,7 +57,7 @@
           </b-list-group-item>
         </b-list-group>
       </b-col>
-      <b-col cols="12" lg="5" class="mb-md-3">
+      <b-col cols="12" lg="5" class="mb-3">
         <h4 class="text-center">Vehicles</h4>
         <b-list-group>
           <b-list-group-item
@@ -72,7 +72,7 @@
           </b-list-group-item>
         </b-list-group>
       </b-col>
-      <b-col cols="12" lg="5" offset-md="1">
+      <b-col cols="12" lg="5" offset-md="1" class="mb-3 mb-md-auto">
         <h4 class="text-center">Films</h4>
         <b-list-group>
           <b-list-group-item

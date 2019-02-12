@@ -1,6 +1,6 @@
 <template>
   <div class="film-detail">
-    <h1>"{{ film.title }}" Details</h1>
+    <h1 class="text-center">"{{ film.title }}" Details</h1>
     <b-row class="mt-5">
       <b-col cols="12" sm="6">
         <p class="text-justify">
