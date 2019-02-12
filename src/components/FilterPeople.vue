@@ -16,7 +16,7 @@
         <h4 slot="header" class="card-text">Filters Table</h4>
         <b-form>
           <b-row>
-            <b-col cols="12" sm="6" md="4" xl="3">
+            <b-col cols="12" sm="6" md="4">
               <b-form-group label="Name / Species">
                 <b-input-group>
                   <b-form-input
@@ -33,7 +33,7 @@
                 </b-input-group>
               </b-form-group>
             </b-col>
-            <b-col cols="12" sm="6" md="4" xl="3">
+            <b-col cols="12" sm="6" md="4">
               <legend class="col-form-label pt-0">Planets</legend>
               <b-form-select
                 multiple
@@ -54,7 +54,7 @@
                 </option>
               </b-form-select>
             </b-col>
-            <b-col cols="12" sm="6" md="4" xl="3">
+            <b-col cols="12" sm="6" md="4">
               <legend class="col-form-label pt-0">Gender</legend>
               <b-form-select
                 id="genderFilter"
@@ -67,34 +67,35 @@
               >
               </b-form-select>
             </b-col>
-            <!-- <b-col cols="12" sm="6" md="4" xl="3">
-              <legend class="col-form-label pt-0">Birthday Year Range</legend>
-              <b-form-input
-                id="birthYearFilter"
-                name="birthYearFilter"
-                size="sm"
+            <b-col cols="12">
+              <legend class="col-form-label pt-0 text-center">
+                Birthday Year
+              </legend>
+              <vue-slider
                 v-model="filter.birth_year"
-                type="range"
-                class="custom-range"
-              ></b-form-input>
-              <div class="d-flex justify-content-between mt-2">
-                <div v-b-tooltip.html.bottom title="Before the Battle of Yavin">
-                  <small>
-                    BBY
-                  </small>
-                </div>
-                <div v-b-tooltip.html.bottom title="Battle of Yavin">
-                  <small>
-                    BY
-                  </small>
-                </div>
-                <div v-b-tooltip.html.bottom title="After the Battle of Yavin">
-                  <small>
-                    ABY
-                  </small>
-                </div>
-              </div>
-            </b-col> -->
+                :min="-200"
+                :max="200"
+                id="birthFilter"
+                name="birthFilter"
+                class="mt-5"
+              >
+                <template slot="tooltip" slot-scope="tooltip">
+                  <div
+                    class="vue-slider-tooltip-top vue-slider-tooltip-wrap"
+                    style="visibility: inherit;"
+                  >
+                    <span class="vue-slider-tooltip">
+                      {{ tooltip.value }}{{ tooltip.value > 0 ? "ABY" : "BBY" }}
+                    </span>
+                  </div>
+                </template>
+              </vue-slider>
+              <small class="font-italic  text-muted">
+                BBY: Before the Battle of Yavin.
+                <br />
+                ABY: After the Battle of Yavin.
+              </small>
+            </b-col>
           </b-row>
         </b-form>
       </b-card>

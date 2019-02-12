@@ -77,7 +77,7 @@ export default {
         name_specie: "",
         planets: [],
         gender: null,
-        birth_year: null
+        birth_year: [-200, 200]
       },
       fields: [
         { sortable: "true", key: "name" },
@@ -168,6 +168,21 @@ export default {
             pass = false;
           }
         }
+
+        let birth_year = parseFloat(item.birth_year.replace(/[A-Z]/gi, ""));
+        let min = parseFloat(filtros.birth_year[0]);
+        let max = parseFloat(filtros.birth_year[1]);
+
+        if (!birth_year) {
+          return true;
+        } else {
+          if (min < max) {
+            if (!birth_year.between(min, max)) {
+              pass = false;
+            }
+          }
+        }
+
         return pass;
       });
 
