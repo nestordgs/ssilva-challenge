@@ -1,10 +1,20 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
+import filmsModule from "./store/modules/films";
+import peopleModule from "./store/modules/people";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  plugins: [createPersistedState()],
+  state: {
+    apiURL: "https://swapi.co/api/"
+  },
   mutations: {},
-  actions: {}
+  actions: {},
+  modules: {
+    films: filmsModule,
+    people: peopleModule
+  }
 });
