@@ -154,7 +154,12 @@ export default {
       array = array.filter(item => {
         let pass = true;
         if (filtros.name_specie) {
-          if (!item.name.includes(filtros.name_specie)) {
+
+          let nameSpecie = this.$store.getters.getSpecieByUrl(item.species[0]);
+          if (
+            !item.name.includes(filtros.name_specie) &&
+            !nameSpecie.includes(filtros.name_specie)
+          ) {
             pass = false;
           }
         }

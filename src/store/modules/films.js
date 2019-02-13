@@ -62,6 +62,11 @@ export default {
       directors = [...new Set(directors)];
 
       return directors;
+    },
+    getFilmTitleByUrl: state => url => {
+      let film = state.data.results.find(film => film.url === url);
+
+      return film ? film.title : "Unknown";
     }
   }
 };

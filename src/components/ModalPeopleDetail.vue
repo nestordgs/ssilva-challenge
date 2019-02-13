@@ -76,14 +76,14 @@
         <h4 class="text-center">Films</h4>
         <b-list-group>
           <b-list-group-item
-            v-for="(film, index) in info.films"
+            v-for="film in info.films"
             :key="film.id"
             class="text-center"
           >
             <b-link
               :to="{ name: 'films.detail', params: { id: linkId(film) } }"
             >
-              Film {{ index + 1 }}
+              {{ $store.getters.getFilmTitleByUrl(film) }}
             </b-link>
           </b-list-group-item>
         </b-list-group>
