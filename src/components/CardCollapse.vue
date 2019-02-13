@@ -1,7 +1,10 @@
 <template>
   <b-card no-body>
     <b-card-header header-tag="header" class="p-1" role="tab">
-      <h4 class="mb-0 text-capitalize" v-b-toggle="`${title}Collapse`">
+      <h4
+        class="mb-0 text-capitalize text-center"
+        v-b-toggle="`${title}Collapse`"
+      >
         {{ title }}
       </h4>
     </b-card-header>
