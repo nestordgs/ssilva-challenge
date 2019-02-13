@@ -44,15 +44,8 @@
                 id="planetsFilter"
                 name="planetsFilter"
                 :value="filter.planets"
-              >
-                <option
-                  v-for="planet in $store.state.people.planets"
-                  :key="planet.url"
-                  :value="planet.url"
-                >
-                  {{ planet.name }}
-                </option>
-              </b-form-select>
+                :options="optionsPlanets"
+              ></b-form-select>
             </b-col>
             <b-col cols="12" sm="6" md="4">
               <legend class="col-form-label pt-0">Gender</legend>
@@ -63,7 +56,7 @@
                 size="sm"
                 v-model="filter.gender"
                 :value="filter.gender"
-                :options="optionsGender"
+                :options="optionsGenders"
               >
               </b-form-select>
             </b-col>
@@ -73,8 +66,8 @@
               </legend>
               <vue-slider
                 v-model="filter.birth_year"
-                :min="-200"
-                :max="200"
+                :min="-2000"
+                :max="2000"
                 id="birthFilter"
                 name="birthFilter"
                 class="mt-5"
@@ -90,11 +83,27 @@
                   </div>
                 </template>
               </vue-slider>
-              <small class="font-italic  text-muted">
-                BBY: Before the Battle of Yavin.
-                <br />
-                ABY: After the Battle of Yavin.
-              </small>
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <small class="font-italic  text-muted">
+                    BBY: Before the Battle of Yavin.
+                    <br />
+                    ABY: After the Battle of Yavin.
+                  </small>
+                </div>
+                <div>
+                  <b-form-checkbox
+                    size="sm"
+                    id="includeUnknowFilter"
+                    name="includeUnknowFilter"
+                    v-model="filter.includeUnknown"
+                  >
+                    <span class="font-weight-bold">
+                      Include Unknow Birthday Year
+                    </span>
+                  </b-form-checkbox>
+                </div>
+              </div>
             </b-col>
           </b-row>
         </b-form>
@@ -112,28 +121,30 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      optionsPlanets: [
-        { value: null, text: "Select One or More Planets" },
-        { value: "martes", text: "Martes" },
-        { value: "venus", text: "Venus" },
-        { value: "jupiter", text: "Jupiter" },
-        { value: "tierta", text: "Tierra" }
-      ],
-      optionsGender: [
-        { value: null, text: "Select One Gender" },
-        { value: "m", text: "Male" },
-        { value: "f", text: "Female" },
-        { value: "h", text: "Hermaphrodite" },
-        { value: "n", text: "N/A" }
-      ]
-    };
-  },
   computed: {
     numFilters() {
       return Object.values(this.filter).filter(value => value && value.length)
         .length;
+    },
+    optionsPlanets() {
+      let planets = [];
+
+      for (const character of this.$store.getters.getPeople) {
+        planets.push(this.$store.getters.getPlanetByUrl(character.homeworld));
+      }
+
+      planets = [...new Set(planets)];
+      return planets.sort();
+    },
+    optionsGenders() {
+      let genders = [{ value: null, text: "Select One Gender" }];
+
+      for (const character of this.$store.getters.getPeople) {
+        genders.push(character.gender);
+      }
+
+      genders = [...new Set(genders)];
+      return genders.sort();
     }
   },
   methods: {}

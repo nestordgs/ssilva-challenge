@@ -77,7 +77,8 @@ export default {
         name_specie: "",
         planets: [],
         gender: null,
-        birth_year: [-200, 200]
+        birth_year: [-2000, 2000],
+        includeUnknown: true
       },
       fields: [
         { sortable: "true", key: "name" },
@@ -154,7 +155,6 @@ export default {
       array = array.filter(item => {
         let pass = true;
         if (filtros.name_specie) {
-
           let nameSpecie = this.$store.getters.getSpecieByUrl(item.species[0]);
           if (
             !item.name.includes(filtros.name_specie) &&
@@ -164,12 +164,13 @@ export default {
           }
         }
         if (filtros.gender) {
-          if (!item.gender.startsWith(filtros.gender)) {
+          if (!(item.gender === filtros.gender)) {
             pass = false;
           }
         }
         if (filtros.planets.length) {
-          if (!filtros.planets.includes(item.homeworld)) {
+          let namePlanet = this.$store.getters.getPlanetByUrl(item.homeworld);
+          if (!filtros.planets.includes(namePlanet)) {
             pass = false;
           }
         }
@@ -178,14 +179,16 @@ export default {
         let min = parseFloat(filtros.birth_year[0]);
         let max = parseFloat(filtros.birth_year[1]);
 
-        if (!birth_year) {
-          return true;
-        } else {
+        if (birth_year) {
           if (min < max) {
             if (!birth_year.between(min, max)) {
               pass = false;
             }
           }
+        }
+
+        if (!birth_year && !filtros.includeUnknown) {
+          pass = false;
         }
 
         return pass;
