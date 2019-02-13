@@ -42,7 +42,7 @@
           <cardCollapse title="vehicles" :data="film.vehicles" />
         </b-card-group>
       </b-col>
-      <b-col cols="12" sm="6" md="3" class="mx-auto">
+      <b-col cols="12" sm="6" md="3">
         <b-card-group deck class="mb-3">
           <cardCollapse title="species" :data="film.species" />
         </b-card-group>
@@ -52,7 +52,13 @@
       :info="$store.state.people.characterDetails"
       @reset="resetModal"
     />
-    <!-- <p>{{ $store.state.characterDetails }}</p> -->
+    <b-row>
+      <b-col cols="12" class="mt-4 text-center">
+        <b-btn varian="outline-primary" :to="{ name: 'films' }">
+          Return to <font-awesome icon="film" /> Films
+        </b-btn>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
