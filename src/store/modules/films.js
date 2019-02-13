@@ -55,14 +55,11 @@ export default {
     getDirectors: state => {
       let directors = [{ value: null, text: "Selecte one Director" }];
 
-      state.data.results.forEach(film => {
-        if (!directors.includes(film.director)) {
-          directors.push({
-            value: film.director,
-            text: film.director
-          });
-        }
-      });
+      for (const film of state.data.results) {
+        directors.push(film.director);
+      }
+
+      directors = [...new Set(directors)];
 
       return directors;
     }
